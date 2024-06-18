@@ -1,3 +1,10 @@
+# Note:
+
+Keeping the master branch clean for easy syncing with upstream.
+Modifications go into the `custom` branch.
+
+# Original README below:
+
 # kickstart.nvim
 
 ## Introduction
