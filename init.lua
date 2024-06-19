@@ -298,7 +298,10 @@ require('lazy').setup({
   --            })
   --        end,
   --    }
-  --
+
+  -- floating terminal
+  { 'numToStr/Fterm.nvim', opts = {} },
+
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
