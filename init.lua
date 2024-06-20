@@ -259,7 +259,6 @@ require('lazy').setup({
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
 
-<<<<<<< HEAD
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
@@ -271,11 +270,9 @@ require('lazy').setup({
   --        end,
   --    }
   --
-=======
   -- floating terminal
   { 'numToStr/Fterm.nvim', opts = {} },
 
->>>>>>> 77d5456 (adding floating terminal)
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
@@ -802,6 +799,9 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- You can use a sub-list to tell conform to run *until* a formatter
+        -- is found.
+        javascript = { { 'prettierd', 'prettier' } },
       },
     },
   },
