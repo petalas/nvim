@@ -600,6 +600,8 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       ---@type table<string, vim.lsp.Config>
       local servers = {
+        bashls = {},
+        shfmt = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -703,6 +705,7 @@ require('lazy').setup({
       -- You can also specify external formatters in here.
       formatters_by_ft = {
         -- rust = { 'rustfmt' },
+        sh = { 'bashls' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
