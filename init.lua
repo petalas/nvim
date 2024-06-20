@@ -261,7 +261,6 @@ require('lazy').setup({
   -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
-<<<<<<< HEAD
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
@@ -273,11 +272,9 @@ require('lazy').setup({
   --        end,
   --    }
   --
-=======
   -- floating terminal
   { 'numToStr/Fterm.nvim', opts = {} },
 
->>>>>>> 77d5456 (adding floating terminal)
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
@@ -738,6 +735,9 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- You can use a sub-list to tell conform to run *until* a formatter
+        -- is found.
+        javascript = { { 'prettierd', 'prettier' } },
       },
     },
   },
