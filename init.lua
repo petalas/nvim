@@ -865,7 +865,7 @@ require('lazy').setup({
     ---@module 'todo-comments'
     ---@type TodoOptions
     ---@diagnostic disable-next-line: missing-fields
-    opts = { signs = false },
+    opts = { signs = true },
   },
 
   { -- Collection of various small independent plugins/modules
