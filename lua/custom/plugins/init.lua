@@ -5,4 +5,10 @@
 
 ---@module 'lazy'
 ---@type LazySpec
-return {}
+return {
+  {
+    'catgoose/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = {},
+  },
+}
