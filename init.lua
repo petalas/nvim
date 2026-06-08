@@ -171,6 +171,23 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Move the current line or selected lines up/down.
+-- The macOS symbols handle terminals that send Option-j/k as text instead of Alt/Meta.
+local line_move_keys = {
+  down = { '<A-j>', '∆' },
+  up = { '<A-k>', '˚' },
+}
+
+for _, key in ipairs(line_move_keys.down) do
+  vim.keymap.set('n', key, '<cmd>move .+1<CR>==', { desc = 'Move line down' })
+  vim.keymap.set('x', key, ":move '>+1<CR>gv=gv", { desc = 'Move selection down' })
+end
+
+for _, key in ipairs(line_move_keys.up) do
+  vim.keymap.set('n', key, '<cmd>move .-2<CR>==', { desc = 'Move line up' })
+  vim.keymap.set('x', key, ":move '<-2<CR>gv=gv", { desc = 'Move selection up' })
+end
+
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
 vim.diagnostic.config {
@@ -248,6 +265,9 @@ vim.api.nvim_create_autocmd({ 'FileChangedShellPost' }, {
   command = "echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None",
 })
 
+package.loaded['custom.autoreload'] = nil
+require('custom.autoreload').setup()
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -272,7 +292,8 @@ rtp:prepend(lazypath)
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
-require('lazy').setup({
+if not vim.g.lazy_did_setup then
+  require('lazy').setup({
   -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
@@ -1023,27 +1044,28 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
-}, { ---@diagnostic disable-line: missing-fields
-  ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
+  }, { ---@diagnostic disable-line: missing-fields
+    ui = {
+      -- If you are using a Nerd Font: set icons to an empty table which will use the
+      -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+      icons = vim.g.have_nerd_font and {} or {
+        cmd = '⌘',
+        config = '🛠',
+        event = '📅',
+        ft = '📂',
+        init = '⚙',
+        keys = '🗝',
+        plugin = '🔌',
+        runtime = '💻',
+        require = '🌙',
+        source = '📄',
+        start = '🚀',
+        task = '📌',
+        lazy = '💤 ',
+      },
     },
-  },
-})
+  })
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
