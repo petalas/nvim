@@ -311,21 +311,7 @@ if not vim.g.lazy_did_setup then
   --        end,
   --    }
   --
-  -- floating terminal
-  { 'numToStr/Fterm.nvim', opts = {} },
-
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-
-  -- floating terminal
+  -- Floating terminal
   { 'numToStr/Fterm.nvim', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
@@ -660,7 +646,6 @@ if not vim.g.lazy_did_setup then
       ---@type table<string, vim.lsp.Config>
       local servers = {
         bashls = {},
-        shfmt = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -736,7 +721,8 @@ if not vim.g.lazy_did_setup then
       -- You can press `g?` for help in this menu.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        -- You can add other tools here that you want Mason to install
+        -- Formatters and other non-LSP tools
+        'shfmt',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -782,7 +768,7 @@ if not vim.g.lazy_did_setup then
       -- You can also specify external formatters in here.
       formatters_by_ft = {
         -- rust = { 'rustfmt' },
-        sh = { 'bashls' },
+        sh = { 'shfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
